@@ -107,6 +107,8 @@ function rollDice() {
 
   historyLog();
   splitDice = '';
+  
+  document.getElementById('formulaString').textContent = '';
 }
 
 function historyLog() {
@@ -116,22 +118,20 @@ function historyLog() {
     newDiv.id = 'historyId1';
     newDiv2.id = 'historyId';
     newDiv.textContent = `Roll: ${formula} [${final.replace(/\+/, '')}] `;
-
     newDiv2.textContent = `Total: ${roundToTwo(eval(final))}`;
     historyBox.prepend(newDiv, newDiv2);
-    document.getElementById('formulaString').textContent =
-      formula + ' = ' + roundToTwo(eval(final));
+    /*document.getElementById('formulaString').textContent =
+      formula + ' = ' + roundToTwo(eval(final));*/
   } else {
     let newDiv = document.createElement('div');
     let newDiv2 = document.createElement('div');
     newDiv.id = 'historyId1';
     newDiv2.id = 'historyId';
     newDiv.textContent = `Roll: [${formula}]`;
-
     newDiv2.textContent = `Total: ${resultWithoutDice}`;
     historyBox.prepend(newDiv, newDiv2);
-    document.getElementById('formulaString').textContent =
-      formula + ' = ' + resultWithoutDice;
+   /* document.getElementById('formulaString').textContent =
+      formula + ' = ' + resultWithoutDice; */
   }
 }
 function roundToTwo(num) {
