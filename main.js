@@ -91,7 +91,12 @@ function rollDice() {
 
   // - - - - - -
 
-  final = resultRoll + dataMod.reduce((a, b) => a + b);
+ if (dataMod.length == 0) {
+    final = resultRoll + dataMod;
+  } else {
+    dataMod.reduce((a, b) => a + b, 0);
+    final = resultRoll + eval(dataMod);
+  }
   /*  console.log('Rolagem: ' + formula);
     console.log('Resultado: ' + eval(final));
     console.log('Detalhes: ' + final.replace(/\+/, '')); */
