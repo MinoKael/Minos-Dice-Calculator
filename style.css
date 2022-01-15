@@ -63,10 +63,30 @@ p {
   justify-content: flex-end;
   font-size: 2rem;
 }
+.memory {
+  height: 1.25rem;
+  width: 100%;
+  color: #ffffff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  margin-right: 3px;
+  z-index: 1;
+  position: absolute;
+}
+
 #formulaString {
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
   text-overflow: ellipsis;
+}
+#memory {
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
 }
 .ops {
   background-color: #b14aed;
