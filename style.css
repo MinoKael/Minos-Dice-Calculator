@@ -123,7 +123,8 @@ p {
   align-items: center;
   justify-content: center;
   border-bottom: 2px #253050 dotted;
-  height: 3rem;
+  word-break: break-all;
+  height: auto;
   width: 12rem;
   vertical-align: middle;
   font-size: 18px;
