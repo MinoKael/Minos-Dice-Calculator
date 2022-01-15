@@ -112,18 +112,24 @@ function rollDice() {
 function historyLog() {
   if (formula.includes('d')) {
     let newDiv = document.createElement('div');
-    newDiv.id = 'historyId';
-    newDiv.textContent = `Roll: ${formula} [${final.replace(/\+/, '')}] 
-      Total: ${roundToTwo(eval(final))}`;
-    historyBox.prepend(newDiv);
+    let newDiv2 = document.createElement('div');
+    newDiv.id = 'historyId1';
+    newDiv2.id = 'historyId';
+    newDiv.textContent = `Roll: ${formula} [${final.replace(/\+/, '')}] `;
+
+    newDiv2.textContent = `Total: ${roundToTwo(eval(final))}`;
+    historyBox.prepend(newDiv, newDiv2);
     document.getElementById('formulaString').textContent =
       formula + ' = ' + roundToTwo(eval(final));
   } else {
     let newDiv = document.createElement('div');
-    newDiv.id = 'historyId';
-    newDiv.textContent = `Roll: [${formula}] 
-    Total: ${resultWithoutDice}`;
-    historyBox.prepend(newDiv);
+    let newDiv2 = document.createElement('div');
+    newDiv.id = 'historyId1';
+    newDiv2.id = 'historyId';
+    newDiv.textContent = `Roll: [${formula}]`;
+
+    newDiv2.textContent = `Total: ${resultWithoutDice}`;
+    historyBox.prepend(newDiv, newDiv2);
     document.getElementById('formulaString').textContent =
       formula + ' = ' + resultWithoutDice;
   }
