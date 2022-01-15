@@ -109,6 +109,7 @@ function rollDice() {
   splitDice = '';
   
   document.getElementById('formulaString').textContent = '';
+  document.getElementById('memory').textContent = formula;
 }
 
 function historyLog() {
@@ -151,6 +152,7 @@ brackets.addEventListener('click', () => {
 //apagar tudo na calculadora
 function allClear() {
   document.getElementById('formulaString').textContent = '';
+  document.getElementById('memory').textContent = '';
   resultRoll = '';
   // brackets.value = '(';
 }
