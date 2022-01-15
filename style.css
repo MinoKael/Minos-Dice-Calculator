@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+}
+body {
+  text-align: center;
+  background-color: #253050;
+  display: grid;
+  place-items: center;
+  font-family: 'Merriweather', serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1 {
+  color: #8fd0f5;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+p {
+  color: aquamarine;
+  margin-bottom: 3rem;
+}
+.diceTrayContainer {
+  display: flex;
+  justify-content: center;
+}
+.storedRolls {
+  display: flex;
+  width: 20rem;
+  height: 35rem;
+  background-color: lightgrey;
+  margin-right: 1rem;
+  overflow: auto;
+}
+.diceTray {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 20rem;
+  height: 35rem;
+  justify-content: space-between;
+}
+.diceHistory {
+  display: flex;
+  width: 15rem;
+  height: 35rem;
+  background-color: #e1bbc9;
+  margin-left: 1rem;
+  flex-direction: column;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.diceHistory::-webkit-scrollbar {
+  display: none;
+}
+
+.preview {
+  height: 4.25rem;
+  width: 100%;
+  color: #ffffff;
+  border: 2px solid #b14aed;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 2rem;
+}
+#formulaString {
+  padding: 0;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+.ops {
+  background-color: #b14aed;
+  height: 12.5%;
+  width: 25%;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+#num {
+  background-color: #e1bbc9;
+  height: 12.5%;
+  width: 25%;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+.dice {
+  background-color: #454ade;
+  height: 12.5%;
+  width: 25%;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+}
+.rollDice {
+  font-size: 2rem;
+}
+.ops:hover {
+  background-color: #9c44cf;
+  cursor: pointer;
+}
+#num:hover {
+  background-color: #caa7b4;
+  cursor: pointer;
+}
+
+.dice:hover {
+  background-color: #3f43cf;
+  cursor: pointer;
+}
+#historyBox {
+  flex: auto;
+  margin-right: 5rem;
+  padding-right: 5px;
+  padding: 0;
+  margin: auto;
+}
+
+#historyId {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px #253050 dotted;
+  height: 3rem;
+  width: 12rem;
+  vertical-align: middle;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#eraseHistory {
+  background-color: #454ade;
+  height: 5%;
+  width: 100%;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+}
+#eraseHistory:hover {
+  background-color: #3f43cf;
+  cursor: pointer;
+}
