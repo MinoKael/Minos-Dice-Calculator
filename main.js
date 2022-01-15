@@ -91,7 +91,7 @@ function rollDice() {
 
   // - - - - - -
 
-  final = resultRoll + dataMod;
+  final = resultRoll + dataMod.reduce((a, b) => a + b);
   /*  console.log('Rolagem: ' + formula);
     console.log('Resultado: ' + eval(final));
     console.log('Detalhes: ' + final.replace(/\+/, '')); */
