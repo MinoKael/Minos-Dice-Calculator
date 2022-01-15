@@ -131,6 +131,15 @@ p {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+#historyId1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-right: 5px;
+  word-break: break-all;
+  margin-top: 5px;
+}
 
 #eraseHistory {
   background-color: #454ade;
