@@ -153,7 +153,7 @@ brackets.addEventListener('click', () => {
 function allClear() {
   document.getElementById('formulaString').textContent = '';
   document.getElementById('memory').textContent = '';
-  resultRoll = '';
+  formula = '';
   // brackets.value = '(';
 }
 //Função para o backspace apagar o último caractere.
