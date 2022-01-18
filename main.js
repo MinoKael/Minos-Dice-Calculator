@@ -7,6 +7,7 @@ let resultOper = '';
 let resultWithoutDice = '';
 let splitDice = [];
 let final;
+let hasResult = false
 
 document
   .querySelectorAll('.dice')
@@ -22,6 +23,10 @@ document
 
 //function to get the string, send to preview and to the variable formula| Match dices without the first digit and join a digit
 function getFormula(string) {
+if (hasResult==true) {
+hasResult = false 
+document.getElementById('formulaString').textContent=''
+} 
   document.getElementById('formulaString').append(string);
   formula = document.getElementById('formulaString').textContent;
 
@@ -90,8 +95,7 @@ function rollDice() {
 
   historyLog();
   splitDice = '';
-
-  document.getElementById('formulaString').textContent = '';
+  HasResult = true
   document.getElementById('memory').textContent = formula;
 }
 
@@ -103,9 +107,9 @@ function historyLog() {
     newDiv.id = 'historyId1';
     newDiv2.id = 'historyId';
     newDiv.textContent = `Roll: ${formula} [${final.replace(/\+/, '')}] `;
-
     newDiv2.textContent = `Total: ${roundToTwo(eval(final))}`;
     historyBox.prepend(newDiv, newDiv2);
+document.getElementById('formulaString').textContent=roundToTwo(eval(final))
   } else {
     let newDiv = document.createElement('div');
     let newDiv2 = document.createElement('div');
@@ -114,6 +118,7 @@ function historyLog() {
     newDiv.textContent = `Roll: [${formula}]`;
     newDiv2.textContent = `Total: ${resultWithoutDice}`;
     historyBox.prepend(newDiv, newDiv2);
+document.getElementById('formulaString').textContent=roundToTwo(eval(final))
   }
 }
 function roundToTwo(num) {
