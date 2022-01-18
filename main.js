@@ -8,29 +8,34 @@ let resultWithoutDice = '';
 let splitDice = [];
 let final;
 
-//Função para pegar os valores dos botões e trazer para o preview
+document
+  .querySelectorAll('.dice')
+  .forEach(dice =>
+    dice.addEventListener('click', () => getFormula(dice.value))
+  );
+document
+  .querySelectorAll('#num')
+  .forEach(num => num.addEventListener('click', () => getFormula(num.value)));
+document
+  .querySelectorAll('.ops')
+  .forEach(ops => ops.addEventListener('click', () => getFormula(ops.value)));
+
+//function to get the string, send to preview and to the variable formula| Match dices without the first digit and join a digit
 function getFormula(string) {
-  /* const dice = document.getElementsByClassName('dice');
-  dice.addEventListener(
-    'click',
-    () => {
-      if (formula.includes(this.value)) {
-        console.log(this.value);
-      }
-    },
-    false
-  ); */
   document.getElementById('formulaString').append(string);
   formula = document.getElementById('formulaString').textContent;
 
-  // data = Object.assign(formula);
-  // dataSplit = data.split(/(\W)/);
-  // console.log(dataSplit);
-  // console.log(formula);
+  const regex3 = /\bd\d+/g;
+  let array = formula.match(regex3);
+  if (array == null) {
+  } else {
+    for (const loop of array) {
+      formula = formula.split(/\bd/).join('1d');
+    }
+  }
 }
-/* const ops = document.getElementsByClassName('ops');
-ops.addEventListener('click', getFormula(this.value)); */
 
+//split the string to match dices and modifiers separately
 function formulaSplit() {
   const regexDice = /\W?\d+(d)\d+/g;
   const regexMod = /\W\d+(?!d)/g;
@@ -38,6 +43,7 @@ function formulaSplit() {
   dataMod = Array.from(formula.matchAll(regexMod), m => m[0]);
 }
 
+//loop to get dice values, loop to roll dice and output rolled values
 function loopRoll() {
   for (const dice of dataDice) {
     splitDice = dice.split('d');
@@ -47,7 +53,6 @@ function loopRoll() {
         resultRoll += '-' + count;
       } else if (splitDice[0].includes('/')) {
         resultOper += '+' + count;
-        //console.log (resultOper)
       } else if (splitDice[0].includes('*')) {
         resultOper += '+' + count;
         console.log(resultOper);
@@ -55,63 +60,44 @@ function loopRoll() {
         resultRoll += '+' + count;
       }
     }
-    //console.log(dice, resultRoll + dataMod)
   }
 }
 
-//função de rolar que inclui todo o processo de calculo e mostrar no historico
+//core function to calculate everything
 function rollDice() {
   if (formula.includes('d')) {
-    //separar a string em array com os dados e modificadores
     formulaSplit();
 
-    //loop para pegar os valores dos dados, loop para rolar os dados e saída dos valores rolados separadamente - - - - - -
     loopRoll();
-    // - - - - - -
 
-    /* console.log(dataDice);
-    console.log(dataMod);
-    console.log(splitDice[0]);
-    console.log(resultOper); */
-
-    //Aplicar parênteses para ser calculado na ordem correta - - - - - -
+    //aplly the parenthesis in the correct place
     if (splitDice[0].includes('/')) {
       resultRoll = '(' + resultRoll + ')/' + eval(resultOper);
     } else if (splitDice[0].includes('*')) {
       resultRoll = '(' + resultRoll + ')*' + eval(resultOper);
     }
-    /* else if (dataMod[0].includes('*')) {
-      resultRoll = '(' + resultRoll + ')';
-    } else if (dataMod[0].includes('/')) {
-      resultRoll = '(' + resultRoll + ')';
-    } */
   } else {
     resultWithoutDice = roundToTwo(eval(formula));
   }
-
-  // - - - - - -
-
- if (dataMod.length == 0) {
+  //check if it has any modifiers and evaluate it
+  if (dataMod.length == 0) {
     final = resultRoll + dataMod;
   } else {
     let dataMod1 = dataMod.reduce((a, b) => a + b, 0);
     final = resultRoll + '+' + eval(dataMod1);
   }
-  /*  console.log('Rolagem: ' + formula);
-    console.log('Resultado: ' + eval(final));
-    console.log('Detalhes: ' + final.replace(/\+/, '')); */
+
   resultRoll = '';
   resultOper = '';
 
-  //console.log('Resultado: ' + resultWithoutDice), (resultWithoutDice = '');
-
   historyLog();
   splitDice = '';
-  
+
   document.getElementById('formulaString').textContent = '';
   document.getElementById('memory').textContent = formula;
 }
 
+//Função para registrar as rolagens na div de historico
 function historyLog() {
   if (formula.includes('d')) {
     let newDiv = document.createElement('div');
@@ -119,10 +105,9 @@ function historyLog() {
     newDiv.id = 'historyId1';
     newDiv2.id = 'historyId';
     newDiv.textContent = `Roll: ${formula} [${final.replace(/\+/, '')}] `;
+
     newDiv2.textContent = `Total: ${roundToTwo(eval(final))}`;
     historyBox.prepend(newDiv, newDiv2);
-    /*document.getElementById('formulaString').textContent =
-      formula + ' = ' + roundToTwo(eval(final));*/
   } else {
     let newDiv = document.createElement('div');
     let newDiv2 = document.createElement('div');
@@ -131,49 +116,25 @@ function historyLog() {
     newDiv.textContent = `Roll: [${formula}]`;
     newDiv2.textContent = `Total: ${resultWithoutDice}`;
     historyBox.prepend(newDiv, newDiv2);
-   /* document.getElementById('formulaString').textContent =
-      formula + ' = ' + resultWithoutDice; */
   }
 }
 function roundToTwo(num) {
   return +(Math.round(num + 'e+2') + 'e-2');
 }
-//função para adicionar 1 dado nos botóes pre definidos de dado
 
-//Função para checar se os parenteses estao abertos ou fechados
-/* function checkBrackets() {
-  brackets.value == '(' ? (brackets.value = ')') : (brackets.value = '(');
-}
-brackets.addEventListener('click', () => {
-  getFormula(brackets.value);
-  checkBrackets();
-});
- */
 //apagar tudo na calculadora
 function allClear() {
   document.getElementById('formulaString').textContent = '';
   document.getElementById('memory').textContent = '';
   formula = '';
-  // brackets.value = '(';
 }
+
 //Função para o backspace apagar o último caractere.
 function eraseLast() {
   formula = formula.slice(0, formula.length - 1);
   document.getElementById('formulaString').textContent = formula;
-  // console.log(formula);
 }
 
-//função para guardar a formula e resultado no histórico
-function storeR() {
-  let sRoll = document.getElementById('formulaString').textContent;
-  let sNewLi = document.createElement('li');
-  sNewLi.id = 'storedId';
-  sNewLi.textContent = sRoll;
-  storedRollsBox.appendChild(sNewLi);
-}
-function eraseStored() {
-  document.getElementById('storedRollsBox').innerHTML = '';
-}
-function eraseHistory() {
+function clearHistory() {
   document.getElementById('historyBox').innerHTML = '';
 }
