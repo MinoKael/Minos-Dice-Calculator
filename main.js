@@ -28,12 +28,10 @@ function getFormula(string) {
   const regex3 = /\bd\d+/g;
   let array = formula.match(regex3);
   if (array == null) {
-  } else {
-    for (const loop of array) {
-      formula = formula.split(/\bd/).join('1d');
+  } else { array.forEach(() => (formula = formula.split(/\bd/).join('1d')));
     }
   }
-}
+
 
 //split the string to match dices and modifiers separately
 function formulaSplit() {
