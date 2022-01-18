@@ -20,131 +20,104 @@
     <h1>Mino's Dice Calculator</h1>
     <p>Roll the dice and good luck!</p>
     <div class="diceTrayContainer">
-     <!--  <div class="storedRolls">
-        <ul id="storedRollsBox"></ul>
-        
-      </div>
-      <button id='eraseStored' onclick="eraseStored()">ERASE</button> -->
       <div class="diceTray">
-        
-
+       
         <div class="preview"><div class="memory"><span id="memory"></span></div><span id="formulaString"></span></div>
 
-        <button disabled id="storeRoll" class="ops" onclick="storeR()"><i class="fas fa-save"></i></button>
+        <button disabled id="storeRoll" class="ops_" onclick="storeR()"><i class="fas fa-save"></i></button>
         <button
         class="ops"
-        onclick="getFormula(this.value)"
         value="kH"
         disabled
         >
         kH
       </button>
-      <button class="ops" onclick="allClear()">AC</button>
+      <button class="ops_" onclick="allClear()">AC</button>
        
         </button>
-        <button class="ops" onclick="getFormula(this.value)" value="/">
+        <button class="ops" value="/">
           /
         </button>
 
-        <button id="num" onclick="getFormula(this.value)" value="7">7</button>
-        <button id="num" onclick="getFormula(this.value)" value="8">8</button>
-        <button id="num" onclick="getFormula(this.value)" value="9">9</button>
-        <button class="ops" onclick="getFormula(this.value)" value="*">
+        <button id="num" value="7">7</button>
+        <button id="num" value="8">8</button>
+        <button id="num" value="9">9</button>
+        <button class="ops" value="*">
           *
         </button>
 
-        <button id="num" onclick="getFormula(this.value)" value="4">4</button>
-        <button id="num" onclick="getFormula(this.value)" value="5">5</button>
-        <button id="num" onclick="getFormula(this.value)" value="6">6</button>
-        <button class="ops" onclick="getFormula(this.value)" value="-">
+        <button id="num" value="4">4</button>
+        <button id="num" value="5">5</button>
+        <button id="num" value="6">6</button>
+        <button class="ops" value="-">
           -
         </button>
 
-        <button id="num" onclick="getFormula(this.value)" value="1">1</button>
-        <button id="num" onclick="getFormula(this.value)" value="2">2</button>
-        <button id="num" onclick="getFormula(this.value)" value="3">3</button>
-        <button class="ops" onclick="getFormula(this.value)" value="+">
+        <button id="num" value="1">1</button>
+        <button id="num" value="2">2</button>
+        <button id="num" value="3">3</button>
+        <button class="ops" value="+">
           +
         </button>
-        <button id="num" onclick="getFormula(this.value)" value="0">0</button>
-        <button class="ops" onclick="getFormula(this.value)" value=".">.</button>
-        <!-- <button
-        class="ops"
-        id="brackets"
-        value="("
-        >
-        ()
-      </button> -->
-        <button class="ops" onclick="eraseLast()">
+        <button id="num" value="0">0</button>
+        <button class="ops" value=".">.</button>
+    
+        <button class="ops_" onclick="eraseLast()">
           <i class="fas fa-backspace"></i>
         </button>
-        <button class="ops" onclick="rollDice()">
+        <button class="ops_" onclick="rollDice()">
           <i class="fas fa-dice-d20"></i>
         </button>
 
         <button
-          id="dice 1d4"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d4"
         >
           d4
         </button>
         <button
-          id="dice 1d6"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d6"
         >
           d6
         </button>
         <button
-          id="dice 1d8"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d8"
         >
           d8
         </button>
         <button
-          id="dice 1d10"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d10"
         >
           d10
         </button>
 
         <button
-          id="dice 1d12"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d12"
         >
           d12
         </button>
         <button
-          id="dice 1d20"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d20"
         >
-          d20
+         d20
         </button>
         <button
-          id="dice 1d100"
           class="dice"
-          onclick="getFormula(this.value)"
           value="d100"
         >
           d100
         </button>
-        <button class="dice" onclick="getFormula(this.value)" value="d">
+        <button class="dice" value="d">
           dx
         </button>
       </div>
       <div class="diceHistory">
-        <button id='eraseHistory' onclick="eraseHistory()">Delete</button>
+        <button id='eraseHistory' onclick="clearHistory()">Clear</button>
         <ul id="historyBox">
           
         </ul>
