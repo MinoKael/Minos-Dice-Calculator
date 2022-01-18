@@ -95,7 +95,7 @@ function rollDice() {
 
   historyLog();
   splitDice = '';
-  HasResult = true
+  hasResult = true
   document.getElementById('memory').textContent = formula;
 }
 
