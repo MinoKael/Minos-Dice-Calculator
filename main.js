@@ -26,6 +26,7 @@ function getFormula(string) {
 if (hasResult==true) {
 hasResult = false 
 document.getElementById('formulaString').textContent=''
+formula = '' 
 } 
   document.getElementById('formulaString').append(string);
   formula = document.getElementById('formulaString').textContent;
