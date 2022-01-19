@@ -66,7 +66,8 @@ function loopRoll() {
 function rollDice() {
   if (formula.match(/d\d+d\d+/)) {
     throw alert('You need to add operators to the dice roll!');
-  } else if (formula.includes(')d') ){
+  } 
+  if (formula.match(/\)d/) ){
   	throw alert('You need to add operators to the dice roll!');
   }
   if (formula.match(/(?<=\s)\(/)) {
