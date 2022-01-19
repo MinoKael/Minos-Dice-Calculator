@@ -1,12 +1,9 @@
 let formula = '';
 let dataDice = [];
-let dataMod = [];
 let resultRoll = '';
-let mod = '';
 let formulaView = '';
 let resultWithoutDice = '';
 let splitDice = [];
-let final;
 let hasResult = true;
 let countDice = [];
 
