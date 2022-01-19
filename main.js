@@ -71,6 +71,7 @@ function rollDice() {
     throw console.error('You need to add operators to the formula!');
   }
   if (formula.match(/(?<=\d\D)\(/)) {
+  } else if (formula.match(/\d\(/)) {
     formula = formula.replace('(', '*(');
   }
   if (formula.includes('d')) {
