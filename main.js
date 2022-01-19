@@ -70,9 +70,12 @@ function rollDice() {
   if (formula.match(/d\d+d/)) {
     throw console.error('You need to add operators to the formula!');
   }
-  if (formula.match(/(?<=\d\D)\(/)) {
-  } else if (formula.match(/\d\(/)) {
-    formula = formula.replace('(', '*(');
+  if (formula.match(/(?<=\s)\(/)) {
+  } else if (formula.match(/\d\(/g)&&/\)\(/g ) {
+    formula = formula.replaceAll(/\b\(/g, '*(');
+    formula =formula.replaceAll(')(', ')*(')
+  } else{
+  	formula =formula.replaceAll(')(', ')*(')
   }
   if (formula.includes('d')) {
     formulaSplit();
