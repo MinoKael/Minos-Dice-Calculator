@@ -128,6 +128,7 @@ function allClear() {
   document.getElementById('formulaString').textContent = '';
   document.getElementById('memory').textContent = '';
   formula = '';
+  formulaView='' 
   brackets.value = '(';
   hasResult = false;
 }
