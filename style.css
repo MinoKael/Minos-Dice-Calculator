@@ -206,7 +206,7 @@ p {
     justify-content: center;
     word-break: break-all;
     height: auto;
-    width: auto;
+    width: 100%;
     vertical-align: middle;
     font-size: 1.15rem;
     margin-top: 5px;
