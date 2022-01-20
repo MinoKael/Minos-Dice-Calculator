@@ -83,7 +83,9 @@ function rollDice() {
   } else {
     resultWithoutDice = roundToTwo(eval(formula));
   }
-
+if (eval(resultRoll) == null) {
+ throw undefined
+ }
   historyLog();
   splitDice = '';
   hasResult = true;
