@@ -129,6 +129,7 @@ function allClear() {
   document.getElementById('memory').textContent = '';
   formula = '';
   brackets.value = '(';
+  hasResult = false;
 }
 
 //Função para o backspace apagar o último caractere.
