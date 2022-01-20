@@ -2,6 +2,8 @@
   margin: 0;
 }
 body {
+  height: auto;
+  width: auto;
   text-align: center;
   background-color: #253050;
   display: grid;
@@ -9,16 +11,21 @@ body {
   font-family: 'Merriweather', serif;
   -webkit-font-smoothing: antialiased;
 }
+
 h1 {
+  font-size: 2.5rem;
   color: #8fd0f5;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 p {
+  font-size: 1.35rem;
   color: aquamarine;
   margin-bottom: 3rem;
 }
 .diceTrayContainer {
+  width: auto;
+  height: auto;
   display: flex;
   justify-content: center;
 }
@@ -55,17 +62,16 @@ p {
 
 .preview {
   height: 4.25rem;
-  width: 100%;
+  width: 316px;
   color: #ffffff;
   border: 2px solid #b14aed;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  font-size: 2rem;
 }
 .memory {
   height: 1.25rem;
-  width: 100%;
+  width: 19.5rem;
   color: #ffffff;
   display: flex;
   align-items: flex-end;
@@ -75,27 +81,21 @@ p {
   margin-right: 3px;
   z-index: 1;
   position: absolute;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
 }
 
 #formulaString {
   padding: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-y: hidden;
+  overflow-x: auto;
+  text-overflow: clip;
+  font-size: 2rem;
 }
-#memory {
-  padding: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 18px;
-}
-.ops {
-  background-color: #b14aed;
-  height: 12.5%;
-  width: 25%;
-  border: none;
-  font-size: 1.5rem;
-  padding: 0;
-}
+
+.ops,
 .ops_ {
   background-color: #b14aed;
   height: 12.5%;
@@ -104,6 +104,7 @@ p {
   font-size: 1.5rem;
   padding: 0;
 }
+
 #num {
   background-color: #e1bbc9;
   height: 12.5%;
@@ -121,9 +122,6 @@ p {
   font-size: 1.5rem;
   padding: 0;
 }
-.rollDice {
-  font-size: 2rem;
-}
 .ops:hover {
   background-color: #9c44cf;
   cursor: pointer;
@@ -136,7 +134,6 @@ p {
   background-color: #caa7b4;
   cursor: pointer;
 }
-
 .dice:hover {
   background-color: #3f43cf;
   cursor: pointer;
@@ -158,7 +155,7 @@ p {
   height: auto;
   width: 15rem;
   vertical-align: middle;
-  font-size: 18px;
+  font-size: 1.15rem;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -183,4 +180,42 @@ p {
 #eraseHistory:hover {
   background-color: #3f43cf;
   cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+    margin-top: 1.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .diceTrayContainer {
+    flex-direction: column;
+  }
+  .diceTray,
+  .diceHistory {
+    width: 20rem;
+    height: 35rem;
+  }
+  .diceHistory {
+    margin-top: 16px;
+    margin-left: 0;
+  }
+  #historyId {
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+    height: auto;
+    width: auto;
+    vertical-align: middle;
+    font-size: 1.15rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  #historyId1 {
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+    margin-top: 5px;
+  }
 }
