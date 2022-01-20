@@ -64,6 +64,9 @@ function loopRoll() {
 
 //core function to calculate everything
 function rollDice() {
+if (formula == '' ) {
+ throw undefined
+ }
   if (formula.match(/d\d+d\d+/)) {
     throw alert('You need to add operators to the dice roll!');
   } else if (formula.match(/\)\d?d/) ){
@@ -83,9 +86,7 @@ function rollDice() {
   } else {
     resultWithoutDice = roundToTwo(eval(formula));
   }
-if (eval(resultRoll) == null) {
- throw undefined
- }
+
   historyLog();
   splitDice = '';
   hasResult = true;
