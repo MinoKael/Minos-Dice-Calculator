@@ -1,11 +1,11 @@
-let formula = '';
-let dataDice = [];
-let resultRoll = '';
-let formulaView = '';
-let resultWithoutDice = '';
-let splitDice = [];
+let formula,
+  formulaView,
+  resultRoll,
+  resultWithoutDice = '';
+let dataDice,
+  splitDice,
+  countDice = [];
 let hasResult = true;
-let countDice = [];
 
 document
   .querySelectorAll('.dice')
