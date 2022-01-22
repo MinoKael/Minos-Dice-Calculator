@@ -119,6 +119,11 @@ function historyLog() {
   }
 }
 function storeFormula() {
+if (formula.match(/d\d+d\d+/)) {
+    throw alert('You need to add operators to save a macro!');
+  } else if (formula.match(/\)\d?d/)) {
+    throw alert('You need to add operators to save a macro!');
+  }
   let newBtn = document.createElement('button');
   newBtn.className = 'storedBtn';
   newBtn.textContent = `${formula}`;
