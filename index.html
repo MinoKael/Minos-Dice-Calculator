@@ -24,7 +24,7 @@
        
         <div class="preview"><div class="memory"><span id="memory"></span></div><span id="formulaString"></span></div>
 
-        <button disabled id="storeRoll" class="ops_" onclick="storeR()"><i class="fas fa-save"></i></button>
+        <button id="storeRoll" class="ops_" onclick="storeFormula()"><i class="fas fa-save"></i></button>
         <button
         id="brackets"
         class="ops"
@@ -119,9 +119,12 @@
       <div class="diceHistory">
         <button id='eraseHistory' onclick="clearHistory()">Clear</button>
         <ul id="historyBox">
-          
         </ul>
-        
+      </div>
+      <div class="storedFormulas" id=storedFormulas>
+        <button id='eraseStored' onclick="deleteStored()">Delete Last</button>
+        <ul id="storedList">
+        </ul>
       </div>
     </div>
     <script src="main.js"></script>

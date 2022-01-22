@@ -64,20 +64,20 @@ function loopRoll() {
 
 //core function to calculate everything
 function rollDice() {
-if (formula == '' ) {
- throw undefined
- }
+  if (formula == '') {
+    throw undefined;
+  }
   if (formula.match(/d\d+d\d+/)) {
     throw alert('You need to add operators to the dice roll!');
-  } else if (formula.match(/\)\d?d/) ){
-  	throw alert('You need to add operators to the dice roll!');
+  } else if (formula.match(/\)\d?d/)) {
+    throw alert('You need to add operators to the dice roll!');
   }
   if (formula.match(/(?<=\s)\(/)) {
-  } else if (formula.match(/\d\(/g)&&/\)\(/g ) {
+  } else if (formula.match(/\d\(/g) && /\)\(/g) {
     formula = formula.replaceAll(/\b\(/g, '*(');
-    formula =formula.replaceAll(')(', ')*(')
-  } else{
-  	formula =formula.replaceAll(')(', ')*(')
+    formula = formula.replaceAll(')(', ')*(');
+  } else {
+    formula = formula.replaceAll(')(', ')*(');
   }
   if (formula.includes('d')) {
     formulaSplit();
@@ -94,7 +94,7 @@ if (formula == '' ) {
   document.getElementById('memory').textContent = formulaView;
 }
 
-//Função para registrar as rolagens na div de historico
+//Function to log the detailed dice roll
 function historyLog() {
   if (formulaView.includes('d')) {
     let newDiv = document.createElement('div');
@@ -118,6 +118,16 @@ function historyLog() {
     document.getElementById('formulaString').textContent = resultWithoutDice;
   }
 }
+function storeFormula() {
+  let newBtn = document.createElement('button');
+  newBtn.className = 'storedBtn';
+  newBtn.textContent = `${formula}`;
+  newBtn.value = `${formula}`;
+  newBtn.onclick = function () {
+    rollStored(this.value);
+  };
+  storedList.prepend(newBtn);
+}
 
 function roundToTwo(num) {
   return +(Math.round(num + 'e+2') + 'e-2');
@@ -126,17 +136,17 @@ function roundToTwo(num) {
 function checkBrackets() {
   brackets.value == '(' ? (brackets.value = ')') : (brackets.value = '(');
 }
-//apagar tudo na calculadora
+//clear everything on the memory
 function allClear() {
   document.getElementById('formulaString').textContent = '';
   document.getElementById('memory').textContent = '';
   formula = '';
-  formulaView='' 
+  formulaView = '';
   brackets.value = '(';
   hasResult = false;
 }
 
-//Função para o backspace apagar o último caractere.
+//erase last input
 function eraseLast() {
   formula = formula.slice(0, formula.length - 1);
   document.getElementById('formulaString').textContent = formula;
@@ -144,4 +154,15 @@ function eraseLast() {
 
 function clearHistory() {
   document.getElementById('historyBox').innerHTML = '';
+}
+
+function deleteStored() {
+  const stored = document.querySelector('.storedBtn');
+  stored.parentElement.removeChild(stored);
+}
+
+function rollStored(string) {
+  document.getElementById('formulaString').textContent = '';
+  getFormula(string);
+  rollDice();
 }

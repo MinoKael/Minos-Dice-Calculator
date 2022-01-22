@@ -44,6 +44,7 @@ p {
   width: 20rem;
   height: 35rem;
   justify-content: space-between;
+  order: 2;
 }
 .diceHistory {
   display: flex;
@@ -55,8 +56,22 @@ p {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  order: 3;
 }
-.diceHistory::-webkit-scrollbar {
+.storedFormulas {
+  display: flex;
+  width: 15rem;
+  height: 35rem;
+  background-color: #e1bbc9;
+  margin-right: 1rem;
+  flex-direction: column;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  order: 1;
+}
+.diceHistory::-webkit-scrollbar,
+.storedFormulas::-webkit-scrollbar {
   display: none;
 }
 
@@ -122,14 +137,13 @@ p {
   font-size: 1.5rem;
   padding: 0;
 }
-.ops:hover {
+.ops:hover,
+.ops_:hover,
+.storedBtn:hover {
   background-color: #9c44cf;
   cursor: pointer;
 }
-.ops_:hover {
-  background-color: #9c44cf;
-  cursor: pointer;
-}
+
 #num:hover {
   background-color: #caa7b4;
   cursor: pointer;
@@ -169,7 +183,8 @@ p {
   margin-top: 5px;
 }
 
-#eraseHistory {
+#eraseHistory,
+#eraseStored {
   background-color: #454ade;
   height: 5%;
   width: 100%;
@@ -177,10 +192,27 @@ p {
   font-size: 1.5rem;
   padding: 0;
 }
-#eraseHistory:hover {
+#eraseHistory:hover,
+#eraseStored:hover {
   background-color: #3f43cf;
   cursor: pointer;
 }
+#storedList {
+  flex: auto;
+  margin: 0;
+  padding: 0;
+}
+.storedBtn {
+  text-align: center;
+  width: 14rem;
+  margin: 5px;
+  word-break: break-all;
+  background-color: #b14aed;
+  border: none;
+  padding: 16px 1rem;
+  font-size: 20px;
+}
+
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 2rem;
@@ -191,6 +223,7 @@ p {
   }
   .diceTrayContainer {
     flex-direction: column;
+    align-items: center;
   }
   .diceTray,
   .diceHistory {
@@ -200,6 +233,7 @@ p {
   .diceHistory {
     margin-top: 16px;
     margin-left: 0;
+    margin-bottom: 8px;
   }
   #historyId {
     align-items: center;
@@ -217,5 +251,23 @@ p {
     justify-content: center;
     word-break: break-all;
     margin-top: 5px;
+  }
+  .storedFormulas {
+    display: flex;
+    width: 20rem;
+    height: auto;
+    background-color: #e1bbc9;
+    margin-top: 1rem;
+    margin-right: 0;
+    flex-direction: column;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    order: 2;
+  }
+}
+@media screen and (min-width: 992px) {
+  .diceTrayContainer {
+    transform: scale(1.1);
   }
 }
