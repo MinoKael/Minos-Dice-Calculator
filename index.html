@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -17,6 +17,7 @@
     <title>Mino's Dice Calculator</title>
   </head>
   <body>
+   
     <h1>Mino's Dice Calculator</h1>
     <p>Roll the dice and good luck!</p>
     <div class="diceTrayContainer">
@@ -24,7 +25,7 @@
        
         <div class="preview"><div class="memory"><span id="memory"></span></div><span id="formulaString"></span></div>
 
-        <button id="storeRoll" class="ops_" onclick="storeFormula()"><i class="fas fa-save"></i></button>
+        <button id="macroRoll" class="ops_" onclick="saveMacro()"><i class="fas fa-save"></i></button>
         <button
         id="brackets"
         class="ops"
@@ -121,12 +122,16 @@
         <ul id="historyBox">
         </ul>
       </div>
-      <div class="storedFormulas" id=storedFormulas>
-        <button id='eraseStored' onclick="deleteStored()">Delete Last</button>
-        <ul id="storedList">
+      <div class="macroDiceRolls" id=macroDiceRolls>
+        <button id='eraseMacro' onclick="deleteMacro()">Delete Last</button>
+        <ul id="macroList">
+          
         </ul>
       </div>
     </div>
+    <footer>
+      <p class='attribution'> Coded by <a href="https://github.com/MinoKael" target="_blank">Mikael Santana</a>.</p>
+    </footer>
     <script src="main.js"></script>
   </body>
 </html>

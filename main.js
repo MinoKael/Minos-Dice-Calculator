@@ -6,6 +6,7 @@ let dataDice,
   splitDice,
   countDice = [];
 let hasResult = true;
+let checkMacro = false;
 
 document
   .querySelectorAll('.dice')
@@ -118,15 +119,29 @@ function historyLog() {
     document.getElementById('formulaString').textContent = resultWithoutDice;
   }
 }
-function storeFormula() {
+
+//Save macro
+function saveMacro() {
+  if (formula == '') {
+    throw alert(`You can't save a blank macro!`);
+  }
+  if (formula.match(/d\d+d\d+/)) {
+    throw alert('You need to add operators to save this macro!');
+  } else if (formula.match(/\)\d?d/)) {
+    throw alert('You need to add operators to save this macro!');
+  }
+
   let newBtn = document.createElement('button');
-  newBtn.className = 'storedBtn';
+
+  newBtn.className = 'macroRollBtn';
   newBtn.textContent = `${formula}`;
   newBtn.value = `${formula}`;
+
   newBtn.onclick = function () {
-    rollStored(this.value);
+    rollMacro(this.value);
   };
-  storedList.prepend(newBtn);
+
+  macroList.prepend(newBtn);
 }
 
 function roundToTwo(num) {
@@ -146,7 +161,6 @@ function allClear() {
   hasResult = false;
 }
 
-//erase last input
 function eraseLast() {
   formula = formula.slice(0, formula.length - 1);
   document.getElementById('formulaString').textContent = formula;
@@ -156,12 +170,15 @@ function clearHistory() {
   document.getElementById('historyBox').innerHTML = '';
 }
 
-function deleteStored() {
-  const stored = document.querySelector('.storedBtn');
+function deleteMacro() {
+  const stored = document.querySelector('.macroRollBtn');
   stored.parentElement.removeChild(stored);
 }
 
-function rollStored(string) {
+//const stored = document.querySelectorAll('.macroRollBtn');
+
+//function to roll a macro dice roll
+function rollMacro(string) {
   document.getElementById('formulaString').textContent = '';
   getFormula(string);
   rollDice();

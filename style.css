@@ -1,42 +1,52 @@
 * {
   margin: 0;
 }
+:root {
+  --eerie_black: #181818;
+  --eerie_black_hover: #242424;
+  --black_bg: #0f0f0f;
+  --black_hover: #1b1b1b;
+  --black: #0c0c0c;
+  --yellow: #ffda22;
+  --dark_yellow: #c9a70b;
+  --purple: #0d0710;
+  --purple_hover: #421352;
+  --white: #ccccc0;
+}
+
 body {
-  height: auto;
-  width: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
-  background-color: #253050;
-  display: grid;
+  background: var(--black_bg);
   place-items: center;
   font-family: 'Merriweather', serif;
   -webkit-font-smoothing: antialiased;
 }
 
+header {
+  margin-top: 0.3rem;
+  width: 33vw;
+  height: 3vh;
+}
 h1 {
   font-size: 2.5rem;
-  color: #8fd0f5;
+  color: var(--yellow);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 p {
   font-size: 1.35rem;
-  color: aquamarine;
+  color: var(--dark_yellow);
   margin-bottom: 3rem;
 }
+
 .diceTrayContainer {
-  width: auto;
-  height: auto;
   display: flex;
-  justify-content: center;
 }
-.storedRolls {
-  display: flex;
-  width: 20rem;
-  height: 35rem;
-  background-color: lightgrey;
-  margin-right: 1rem;
-  overflow: auto;
-}
+
 .diceTray {
   display: flex;
   flex-direction: row;
@@ -50,7 +60,7 @@ p {
   display: flex;
   width: 15rem;
   height: 35rem;
-  background-color: #e1bbc9;
+  background-color: var(--eerie_black);
   margin-left: 1rem;
   flex-direction: column;
   overflow-y: scroll;
@@ -58,11 +68,11 @@ p {
   scrollbar-width: none;
   order: 3;
 }
-.storedFormulas {
+.macroDiceRolls {
   display: flex;
   width: 15rem;
   height: 35rem;
-  background-color: #e1bbc9;
+  background-color: var(--eerie_black);
   margin-right: 1rem;
   flex-direction: column;
   overflow-y: scroll;
@@ -71,32 +81,26 @@ p {
   order: 1;
 }
 .diceHistory::-webkit-scrollbar,
-.storedFormulas::-webkit-scrollbar {
+.macroDiceRolls::-webkit-scrollbar {
   display: none;
 }
 
 .preview {
   height: 4.25rem;
   width: 316px;
-  color: #ffffff;
-  border: 2px solid #b14aed;
+  color: var(--white);
+  border: 2px solid var(--dark_yellow);
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
 }
 .memory {
-  height: 1.25rem;
-  width: 19.5rem;
-  color: #ffffff;
+  color: var(--white);
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  font-size: 2rem;
   margin-bottom: 3rem;
   margin-right: 3px;
   z-index: 1;
   position: absolute;
-  padding: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1rem;
@@ -112,7 +116,8 @@ p {
 
 .ops,
 .ops_ {
-  background-color: #b14aed;
+  background-color: var(--black);
+  color: var(--white);
   height: 12.5%;
   width: 25%;
   border: none;
@@ -121,7 +126,8 @@ p {
 }
 
 #num {
-  background-color: #e1bbc9;
+  background-color: var(--eerie_black);
+  color: var(--white);
   height: 12.5%;
   width: 25%;
   border: none;
@@ -130,7 +136,8 @@ p {
 }
 
 .dice {
-  background-color: #454ade;
+  background-color: var(--purple);
+  color: var(--dark_yellow);
   height: 12.5%;
   width: 25%;
   border: none;
@@ -139,17 +146,17 @@ p {
 }
 .ops:hover,
 .ops_:hover,
-.storedBtn:hover {
-  background-color: #9c44cf;
+.macroRollBtn:hover {
+  background-color: var(--black_hover);
   cursor: pointer;
 }
 
 #num:hover {
-  background-color: #caa7b4;
+  background-color: var(--eerie_black_hover);
   cursor: pointer;
 }
 .dice:hover {
-  background-color: #3f43cf;
+  background-color: var(--purple_hover);
   cursor: pointer;
 }
 #historyBox {
@@ -158,17 +165,14 @@ p {
   padding-right: 5px;
   padding: 0;
   margin: auto;
+  color: var(--dark_yellow);
 }
 
 #historyId {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 2px #253050 dotted;
+  border-bottom: 2px var(--white) dotted;
   word-break: break-all;
   height: auto;
   width: 15rem;
-  vertical-align: middle;
   font-size: 1.15rem;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -184,38 +188,71 @@ p {
 }
 
 #eraseHistory,
-#eraseStored {
-  background-color: #454ade;
-  height: 5%;
+#eraseMacro {
+  background-color: var(--purple);
+  color: var(--white);
+  height: 2rem;
   width: 100%;
   border: none;
   font-size: 1.5rem;
   padding: 0;
 }
 #eraseHistory:hover,
-#eraseStored:hover {
-  background-color: #3f43cf;
+#eraseMacro:hover,
+.macroRollBtn:hover {
+  background-color: var(--purple_hover);
   cursor: pointer;
 }
-#storedList {
+
+#macroList {
   flex: auto;
   margin: 0;
   padding: 0;
 }
-.storedBtn {
+.macroRollBtn {
+  display: flex;
   text-align: center;
-  width: 14rem;
+  width: 14.3rem;
   margin: 5px;
   word-break: break-all;
-  background-color: #b14aed;
+  background-color: var(--purple);
+  color: var(--dark_yellow);
   border: none;
-  padding: 16px 1rem;
+  padding: 1rem;
   font-size: 20px;
+  align-items: center;
+  justify-content: space-around;
+}
+.macroRollBtnDelete {
+  background-color: var(--purple);
+  color: var(--dark_yellow);
+  left: 0.7rem;
+  border: none;
+  padding: 1rem;
+  position: absolute;
+}
+.macroRollBtnDelete:hover {
+  background-color: var(--eerie_black);
+  cursor: pointer;
+}
+
+.attribution {
+  margin-top: 3.5rem;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--dark_yellow);
+}
+a:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--purple_hover);
 }
 
 @media screen and (max-width: 600px) {
   h1 {
-    font-size: 2rem;
+    font-size: 1.9rem;
     margin-top: 1.5rem;
   }
   p {
@@ -252,11 +289,10 @@ p {
     word-break: break-all;
     margin-top: 5px;
   }
-  .storedFormulas {
+  .macroDiceRolls {
     display: flex;
     width: 20rem;
     height: auto;
-    background-color: #e1bbc9;
     margin-top: 1rem;
     margin-right: 0;
     flex-direction: column;
@@ -265,8 +301,23 @@ p {
     scrollbar-width: none;
     order: 2;
   }
+  .macroRollBtnDelete {
+    left: 2rem;
+  }
+  .macroRollBtn {
+    width: 19.3rem;
+    padding: 1rem 2rem 1rem 3.2rem;
+  }
+  #macroList {
+    flex: auto;
+    margin: 0;
+  }
+  .attribution {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+  }
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-height: 900px) {
   .diceTrayContainer {
     transform: scale(1.1);
   }
