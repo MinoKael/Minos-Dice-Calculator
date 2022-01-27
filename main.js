@@ -1,13 +1,16 @@
-let formula,
+let formula = '',
   formulaView,
   resultRoll,
   resultWithoutDice = '';
 let dataDice,
   splitDice,
-  countDice = [];
+  countDice = [],
+  countKeepDice = [],
+  final = [],
+  bonusKeep;
 let hasResult = true;
 let checkMacro = false;
-
+console.log(formula);
 document
   .querySelectorAll('.dice')
   .forEach(dice =>
@@ -19,6 +22,9 @@ document
 document
   .querySelectorAll('.ops')
   .forEach(ops => ops.addEventListener('click', () => getFormula(ops.value)));
+document
+  .querySelectorAll('#diceRoll')
+  .forEach(diceRoll => diceRoll.addEventListener('click', () => rollDice()));
 
 brackets.addEventListener('click', () => {
   checkBrackets();
@@ -68,28 +74,67 @@ function rollDice() {
   if (formula == '') {
     throw undefined;
   }
-  if (formula.match(/d\d+d\d+/)) {
-    throw alert('You need to add operators to the dice roll!');
-  } else if (formula.match(/\)\d?d/)) {
-    throw alert('You need to add operators to the dice roll!');
-  }
-  if (formula.match(/(?<=\s)\(/)) {
-  } else if (formula.match(/\d\(/g) && /\)\(/g) {
-    formula = formula.replaceAll(/\b\(/g, '*(');
-    formula = formula.replaceAll(')(', ')*(');
+  if (formula.includes('kH')) {
+    if (formula.match(/[\(]|(\d+d\d+kH\d+d)|(kH\d+\W\d+d)/)) {
+      throw alert(
+        'Invalid Syntax! Keep Dice expression require a correct syntax. Example: 4d6k3 or 2d20k1+5'
+      );
+    } else {
+      keepDiceRoll();
+    }
   } else {
-    formula = formula.replaceAll(')(', ')*(');
-  }
-  if (formula.includes('d')) {
-    formulaSplit();
+    if (formula.match(/d\d+d\d+/)) {
+      throw alert('You need to add operators to the dice roll!');
+    } else if (formula.match(/\)\d?d/)) {
+      throw alert('You need to add operators to the dice roll!');
+    }
+    if (formula.match(/(?<=\s)\(/)) {
+    } else if (formula.match(/\d\(/g) && /\)\(/g) {
+      formula = formula.replaceAll(/\b\(/g, '*(');
+      formula = formula.replaceAll(')(', ')*(');
+    } else {
+      formula = formula.replaceAll(')(', ')*(');
+    }
+    if (formula.includes('d')) {
+      formulaSplit();
 
-    loopRoll();
-  } else {
-    resultWithoutDice = roundToTwo(eval(formula));
+      loopRoll();
+    } else {
+      resultWithoutDice = roundToTwo(eval(formula));
+    }
+
+    historyLog();
+    splitDice = '';
+    hasResult = true;
+    formula = formulaView;
+    document.getElementById('memory').textContent = formulaView;
   }
+}
+
+function keepDiceRoll() {
+  let getKeepClean = formula.match(/\d+d\d+kH\d+/);
+  bonusKeep = formula.match(/\W\d+/g);
+  let keepDice = getKeepClean[0].split('kH');
+  let keepSides = parseInt(keepDice[1]);
+  let numDice = keepDice[0].split('d');
+  if (keepSides >= parseInt(numDice[0])) {
+    throw alert(
+      'Invalid Syntax! The number of dices to keep needs to be lower than the number of dices to roll.'
+    );
+  }
+  for (let i = 1; i <= numDice[0]; i++) {
+    let count = Math.floor(Math.random() * numDice[1] + 1);
+    countKeepDice.push(count);
+  }
+  const drop = parseInt(numDice[0] - keepSides);
+  countKeepDice = countKeepDice.sort((a, b) => b - a);
+  final = countKeepDice.slice(0, -drop);
+  bonusKeep == null ? (bonusKeep = '+0') : bonusKeep;
+
+  final = final.join('+');
 
   historyLog();
-  splitDice = '';
+  countKeepDice = [];
   hasResult = true;
   formula = formulaView;
   document.getElementById('memory').textContent = formulaView;
@@ -97,6 +142,20 @@ function rollDice() {
 
 //Function to log the detailed dice roll
 function historyLog() {
+  if (formulaView.includes('kH')) {
+    let newDiv = document.createElement('div');
+    let newDiv2 = document.createElement('div');
+    newDiv.id = 'historyId1';
+    newDiv2.id = 'historyId';
+    newDiv.textContent = `Roll: ${formulaView} [${countKeepDice.join(' ')}] `;
+    newDiv2.textContent = `Total: ${eval(final + bonusKeep)}`;
+    historyBox.prepend(newDiv, newDiv2);
+    document.getElementById('formulaString').textContent = eval(
+      final + bonusKeep
+    );
+    return;
+  }
+
   if (formulaView.includes('d')) {
     let newDiv = document.createElement('div');
     let newDiv2 = document.createElement('div');
@@ -122,12 +181,10 @@ function historyLog() {
 
 //Save macro
 function saveMacro() {
-  if (formula == '') {
+  if (formula === '') {
     throw alert(`You can't save a blank macro!`);
   }
-  if (formula.match(/d\d+d\d+/)) {
-    throw alert('You need to add operators to save this macro!');
-  } else if (formula.match(/\)\d?d/)) {
+  if (formula.match(/d\d+d\d+|\)\d?d/)) {
     throw alert('You need to add operators to save this macro!');
   }
 

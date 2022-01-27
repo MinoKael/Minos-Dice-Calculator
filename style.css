@@ -9,6 +9,7 @@
   --black: #0c0c0c;
   --yellow: #ffda22;
   --dark_yellow: #c9a70b;
+  --read_yellow: #c9a60ba8;
   --purple: #0d0710;
   --purple_hover: #421352;
   --white: #ccccc0;
@@ -42,11 +43,30 @@ p {
   color: var(--dark_yellow);
   margin-bottom: 3rem;
 }
-
+footer > p {
+  margin-bottom: 1rem;
+}
+.appendix {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.appendix > li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+.tagContainer {
+  color: var(--read_yellow);
+  width: inherit;
+}
 .diceTrayContainer {
   display: flex;
+  margin-bottom: 3rem;
 }
-
+.screenContainer {
+  display: flex;
+}
 .diceTray {
   display: flex;
   flex-direction: row;
@@ -87,7 +107,7 @@ p {
 
 .preview {
   height: 4.25rem;
-  width: 316px;
+  width: 15.75rem;
   color: var(--white);
   border: 2px solid var(--dark_yellow);
   display: flex;
@@ -146,7 +166,8 @@ p {
 }
 .ops:hover,
 .ops_:hover,
-.macroRollBtn:hover {
+.macroRollBtn:hover,
+#saveMacro:hover {
   background-color: var(--black_hover);
   cursor: pointer;
 }
@@ -159,6 +180,7 @@ p {
   background-color: var(--purple_hover);
   cursor: pointer;
 }
+
 #historyBox {
   flex: auto;
   margin-right: 5rem;
@@ -209,6 +231,14 @@ p {
   margin: 0;
   padding: 0;
 }
+#saveMacro {
+  background-color: var(--black);
+  color: var(--white);
+  width: 4rem;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0;
+}
 .macroRollBtn {
   display: flex;
   text-align: center;
@@ -237,7 +267,7 @@ p {
 }
 
 .attribution {
-  margin-top: 3.5rem;
+  margin-top: 1rem;
   font-size: 1rem;
 }
 
@@ -261,6 +291,7 @@ a:hover {
   .diceTrayContainer {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 0;
   }
   .diceTray,
   .diceHistory {
