@@ -57,9 +57,14 @@ footer > p {
   list-style: none;
 }
 .tagContainer {
-  color: var(--read_yellow);
+  color: var(--black);
   width: inherit;
 }
+.tagContainer:hover {
+  transition: all 0.3s ease-in-out;
+  color: var(--read_yellow);
+}
+
 .diceTrayContainer {
   display: flex;
   margin-bottom: 3rem;
