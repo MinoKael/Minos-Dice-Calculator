@@ -34,11 +34,11 @@ brackets.addEventListener('click', () => {
 function getFormula(string) {
   if (hasResult == true) {
     hasResult = false;
-    document.getElementById('formulaString').textContent = '';
+    document.getElementById('formulaString').value = '';
     formula = '';
   }
-  document.getElementById('formulaString').append(string);
-  formula = document.getElementById('formulaString').textContent;
+  document.getElementById('formulaString').value += string;
+  formula = document.getElementById('formulaString').value;
 
   const regex3 = /\bd\d+/g;
   let array = formula.match(regex3);
@@ -74,8 +74,8 @@ function rollDice() {
   if (formula == '') {
     throw undefined;
   }
-  if (formula.includes('kH')) {
-    if (formula.match(/[\(]|(\d+d\d+kH\d+d)|(kH\d+\W\d+d)/)) {
+  if (formula.match(/kh|kl/i)) {
+    if (formula.match(/[\(]|(\d+d\d+(kh|kl)\d+d)|((kh|kl)\d+\W\d+d)/i)) {
       throw alert(
         'Invalid Syntax! Keep Dice expression require a correct syntax. Example: 4d6k3 or 2d20k1+5'
       );
@@ -112,9 +112,9 @@ function rollDice() {
 }
 
 function keepDiceRoll() {
-  let getKeepClean = formula.match(/\d+d\d+kH\d+/);
+  let getKeepClean = formula.match(/\d+d\d+(kh|kl)\d+/i);
   bonusKeep = formula.match(/\W\d+/g);
-  let keepDice = getKeepClean[0].split('kH');
+  let keepDice = getKeepClean[0].split(/kh|kl/i);
   let keepSides = parseInt(keepDice[1]);
   let numDice = keepDice[0].split('d');
   if (keepSides >= parseInt(numDice[0])) {
@@ -127,7 +127,9 @@ function keepDiceRoll() {
     countKeepDice.push(count);
   }
   const drop = parseInt(numDice[0] - keepSides);
-  countKeepDice = countKeepDice.sort((a, b) => b - a);
+  countKeepDice = formula.match(/kh/i)
+    ? countKeepDice.sort((a, b) => b - a)
+    : countKeepDice.sort((a, b) => a - b);
   final = countKeepDice.slice(0, -drop);
   bonusKeep == null ? (bonusKeep = '+0') : bonusKeep;
 
@@ -142,7 +144,7 @@ function keepDiceRoll() {
 
 //Function to log the detailed dice roll
 function historyLog() {
-  if (formulaView.includes('kH')) {
+  if (formulaView.match(/kh|kl/i)) {
     let newDiv = document.createElement('div');
     let newDiv2 = document.createElement('div');
     newDiv.id = 'historyId1';
@@ -150,9 +152,7 @@ function historyLog() {
     newDiv.textContent = `Roll: ${formulaView} [${countKeepDice.join(' ')}] `;
     newDiv2.textContent = `Total: ${eval(final + bonusKeep)}`;
     historyBox.prepend(newDiv, newDiv2);
-    document.getElementById('formulaString').textContent = eval(
-      final + bonusKeep
-    );
+    document.getElementById('formulaString').value = eval(final + bonusKeep);
     return;
   }
 
@@ -164,7 +164,7 @@ function historyLog() {
     newDiv.textContent = `Roll: ${formulaView} [${resultRoll}] `;
     newDiv2.textContent = `Total: ${roundToTwo(eval(resultRoll))}`;
     historyBox.prepend(newDiv, newDiv2);
-    document.getElementById('formulaString').textContent = roundToTwo(
+    document.getElementById('formulaString').value = roundToTwo(
       eval(resultRoll)
     );
   } else {
@@ -175,7 +175,7 @@ function historyLog() {
     newDiv.textContent = `Roll: [${formula}]`;
     newDiv2.textContent = `Total: ${resultWithoutDice}`;
     historyBox.prepend(newDiv, newDiv2);
-    document.getElementById('formulaString').textContent = resultWithoutDice;
+    document.getElementById('formulaString').value = resultWithoutDice;
   }
 }
 
@@ -210,7 +210,7 @@ function checkBrackets() {
 }
 //clear everything on the memory
 function allClear() {
-  document.getElementById('formulaString').textContent = '';
+  document.getElementById('formulaString').value = '';
   document.getElementById('memory').textContent = '';
   formula = '';
   formulaView = '';
@@ -220,7 +220,7 @@ function allClear() {
 
 function eraseLast() {
   formula = formula.slice(0, formula.length - 1);
-  document.getElementById('formulaString').textContent = formula;
+  document.getElementById('formulaString').value = formula;
 }
 
 function clearHistory() {
@@ -231,12 +231,20 @@ function deleteMacro() {
   const stored = document.querySelector('.macroRollBtn');
   stored.parentElement.removeChild(stored);
 }
+function showDiv() {
+  const divTag = document.getElementById('showTag');
+  if (divTag.style.display == 'block') {
+    divTag.style.display = 'none';
+  } else {
+    divTag.style.display = 'block';
+  }
+}
 
 //const stored = document.querySelectorAll('.macroRollBtn');
 
 //function to roll a macro dice roll
 function rollMacro(string) {
-  document.getElementById('formulaString').textContent = '';
+  document.getElementById('formulaString').value = '';
   getFormula(string);
   rollDice();
 }

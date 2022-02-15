@@ -20,22 +20,30 @@
    
     <h1>Mino's Dice Calculator</h1>
     <p>Roll the dice and good luck!</p>
+    <button id=showInfo class="info" onclick="showDiv()"><i class="fas fa-info-circle"></i></button>
     <div class="diceTrayContainer">
       <div class="diceTray">
        <div class=screenContainer>
         <button id="saveMacro" title="This button lets you save a macro"onclick="saveMacro()"><i class="fas fa-save"></i></button>
-         <div class="preview"><div class="memory"><span id="memory"></span></div><span id="formulaString"></span></div>
+         <div class="preview"><div class="memory"><span id="memory"></span></div><!-- <span id="formulaString"></span> --><input type='text' id='formulaString' size="13"></div>
 
        </div>
        <button
        id="keepDice"
        class="ops"
-       value="kH"
-       title='This button lets you keep the highest rolled dices. E.g. 2d20k1'
+       value="kh"
+       title='This button lets you keep the highest rolled dices. E.g. 2d20kh1'
        >
-       kH
+       kh
      </button>
-        
+     <button
+     id="keepDice"
+     class="ops"
+     value="kl"
+     title='This button lets you keep the lowest rolled dices. E.g. 2d20kl1'
+     >
+     kl
+   </button>
         <button
         id="brackets"
         class="ops"
@@ -139,13 +147,13 @@
         </ul>
       </div>
     </div>
-    <div class=tagContainer>
+    <div class=tagContainer id=showTag>
        <b id='info'>Informations</b>
         <br> <br>
       <ul class="appendix">
         <li>
           <i class="fas">
-            kH means you can add a symbol to the syntax to keep the highest rolled dices. E.g. 4d6kH3 (roll four 6-sided dices and keep the three highest ones)
+            kh and kl means you can add a symbol to the syntax to keep the highest ou lowest rolled dices. E.g. 4d6kh3 (roll four 6-sided dices and keep the three highest ones)
           </i>
           <li>
             <i class="fas fa-save"> This icon means you can save a macro with the current syntax.</i>

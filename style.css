@@ -43,9 +43,13 @@ p {
   color: var(--dark_yellow);
   margin-bottom: 3rem;
 }
+footer {
+  order: 3;
+}
 footer > p {
   margin-bottom: 1rem;
 }
+
 .appendix {
   margin: 0;
   padding: 0;
@@ -57,8 +61,10 @@ footer > p {
   list-style: none;
 }
 .tagContainer {
+  display: block;
   color: var(--black);
   width: inherit;
+  order: 1;
 }
 .tagContainer:hover {
   transition: all 0.3s ease-in-out;
@@ -137,6 +143,10 @@ footer > p {
   overflow-x: auto;
   text-overflow: clip;
   font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: var(--white);
+  text-align: end;
 }
 
 .ops,
@@ -168,6 +178,18 @@ footer > p {
   border: none;
   font-size: 1.5rem;
   padding: 0;
+}
+.info {
+  display: none;
+  margin-bottom: 2.5rem;
+  background-color: var(--purple);
+  padding: 0.45rem;
+  color: var(--white);
+  border: none;
+  font-size: 1.5rem;
+}
+#keepDice {
+  width: 12.5%;
 }
 .ops:hover,
 .ops_:hover,
@@ -236,6 +258,7 @@ footer > p {
   margin: 0;
   padding: 0;
 }
+
 #saveMacro {
   background-color: var(--black);
   color: var(--white);
@@ -292,11 +315,13 @@ a:hover {
   }
   p {
     font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
   .diceTrayContainer {
     flex-direction: column;
     align-items: center;
     margin-bottom: 0;
+    order: 2;
   }
   .diceTray,
   .diceHistory {
@@ -351,6 +376,18 @@ a:hover {
   .attribution {
     margin-top: 1.5rem;
     font-size: 1rem;
+  }
+  .tagContainer {
+    display: none;
+    margin-bottom: 1rem;
+    width: 320px;
+    color: var(--read_yellow);
+  }
+
+  .info {
+    display: block;
+    margin-bottom: 1rem;
+    flex-flow: row;
   }
 }
 @media screen and (min-height: 900px) {
