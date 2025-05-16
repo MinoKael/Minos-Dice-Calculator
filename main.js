@@ -72,21 +72,25 @@ function loopRoll() {
 //core function to calculate everything
 function rollDice() {
   if (formula == '') {
-    throw undefined;
+    showToast('Please enter a formula to roll.');
+    return;
   }
   if (formula.match(/kh|kl/i)) {
     if (formula.match(/[\(]|(\d+d\d+(kh|kl)\d+d)|((kh|kl)\d+\W\d+d)/i)) {
-      throw alert(
+      showToast(
         'Invalid Syntax! Keep Dice expression require a correct syntax. Example: 4d6k3 or 2d20k1+5'
       );
+      return;
     } else {
       keepDiceRoll();
     }
   } else {
     if (formula.match(/d\d+d\d+/)) {
-      throw alert('You need to add operators to the dice roll!');
+      showToast('You need to add operators to the dice roll!');
+      return;
     } else if (formula.match(/\)\d?d/)) {
-      throw alert('You need to add operators to the dice roll!');
+      showToast('You need to add operators to the dice roll!');
+      return;
     }
     if (formula.match(/(?<=\s)\(/)) {
     } else if (formula.match(/\d\(/g) && /\)\(/g) {
@@ -118,9 +122,10 @@ function keepDiceRoll() {
   let keepSides = parseInt(keepDice[1]);
   let numDice = keepDice[0].split('d');
   if (keepSides >= parseInt(numDice[0])) {
-    throw alert(
+    showToast(
       'Invalid Syntax! The number of dices to keep needs to be lower than the number of dices to roll.'
     );
+    return;
   }
   for (let i = 1; i <= numDice[0]; i++) {
     let count = Math.floor(Math.random() * numDice[1] + 1);
@@ -182,10 +187,12 @@ function historyLog() {
 //Save macro
 function saveMacro() {
   if (formula === '') {
-    throw alert(`You can't save a blank macro!`);
+    showToast(`You can't save a blank macro!`);
+    return;
   }
   if (formula.match(/d\d+d\d+|\)\d?d/)) {
-    throw alert('You need to add operators to save this macro!');
+    showToast('You need to add operators to save this macro!');
+    return;
   }
 
   let newBtn = document.createElement('button');
@@ -238,6 +245,15 @@ function showDiv() {
   } else {
     divTag.style.display = 'block';
   }
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show';
+  setTimeout(() => {
+    toast.className = 'toast';
+  }, 3000);
 }
 
 //const stored = document.querySelectorAll('.macroRollBtn');

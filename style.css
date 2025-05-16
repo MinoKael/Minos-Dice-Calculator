@@ -308,6 +308,31 @@ a:hover {
   color: var(--purple_hover);
 }
 
+/* Toast Notification */
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  background: linear-gradient(90deg, #ffda22 0%, #c9a70b 100%);
+  color: #181818;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 40px;
+  font-size: 1.1rem;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s, bottom 0.4s;
+  box-shadow: 0 4px 24px 0 #00000055;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 60px;
+}
+
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 1.9rem;
